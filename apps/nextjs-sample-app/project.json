@@ -1,0 +1,54 @@
+{
+  "root": "apps/nextjs-sample-app",
+  "sourceRoot": "apps/nextjs-sample-app",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/nextjs-sample-app",
+        "outputPath": "dist/apps/nextjs-sample-app"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "nextjs-sample-app:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "nextjs-sample-app:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "nextjs-sample-app:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/nextjs-sample-app"],
+      "options": {
+        "jestConfig": "apps/nextjs-sample-app/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nextjs-sample-app/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}

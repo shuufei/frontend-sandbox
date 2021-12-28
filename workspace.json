@@ -1,4 +1,7 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "nextjs-sample-app": "apps/nextjs-sample-app",
+    "nextjs-sample-app-e2e": "apps/nextjs-sample-app-e2e"
+  }
 }
