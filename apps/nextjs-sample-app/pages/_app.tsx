@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import './styles.css';
+import '../styles/global.css';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -8,7 +9,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Welcome to nextjs-sample-app!</title>
       </Head>
-      <main className="app">
+      <main
+        className="app"
+        css={css`
+          padding: 2rem;
+        `}
+      >
         <Component {...pageProps} />
       </main>
     </>
