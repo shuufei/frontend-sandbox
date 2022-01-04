@@ -2,28 +2,33 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import { getSortedPostsData } from '../lib/posts';
 
-export function Home() {
+type Props = {
+  allPostsData: ReturnType<typeof getSortedPostsData>;
+};
+
+export function Home({ allPostsData }: Props) {
+  console.log('--- props: ', allPostsData);
   return (
     <>
       <Head>
         <title>Top</title>
       </Head>
       <Layout home>
-        <h1>Next.js Sample App</h1>
-
-        <nav>
-          <ul>
-            <li>
-              <Link href="/posts/first-post">
-                <a>posts/first-post</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
         <section>
-          <p>[Your Self Introduction]</p>
+          <h2>Blog</h2>
+          <ul>
+            {allPostsData.map(({ id, date, title }) => (
+              <li key={id}>
+                <Link href={`/posts/${id}`}>
+                  <a>{title}</a>
+                </Link>
+                <br />
+                <small>{date}</small>
+              </li>
+            ))}
+          </ul>
         </section>
       </Layout>
     </>
@@ -31,3 +36,13 @@ export function Home() {
 }
 
 export default Home;
+
+// export async function getServerSideProps() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
