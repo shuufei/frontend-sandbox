@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "function-component-sample-app": "apps/function-component-sample-app",
+    "function-component-sample-app-e2e": "apps/function-component-sample-app-e2e",
     "nextjs-sample-app": "apps/nextjs-sample-app",
     "nextjs-sample-app-e2e": "apps/nextjs-sample-app-e2e"
   }
