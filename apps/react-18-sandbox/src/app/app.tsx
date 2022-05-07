@@ -1,54 +1,75 @@
-import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
+import { useState, useDeferredValue, memo, Suspense } from 'react';
+import { Counter } from './components/counter';
 
-import { Route, Routes, Link } from 'react-router-dom';
+// https://qiita.com/uhyo/items/6be96c278c71b0ddb39b#usetransition
+export const Example04 = () => {
+  const [text, setText] = useState('');
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+  const deferredText = useDeferredValue(text);
+
+  console.log(text, deferredText);
+
+  return (
+    <>
+      <h1>04 Example of useDeferredValue</h1>
+      <p>
+        <input value={text} onChange={(e) => setText(e.currentTarget.value)} />
+      </p>
+      <p>{deferredText}</p>
+    </>
+  );
+};
+
+// https://qiita.com/uhyo/items/6be96c278c71b0ddb39b#usetransition
+export const Example05 = () => {
+  const [text, setText] = useState('');
+
+  const deferredText = useDeferredValue(text);
+
+  console.log(text, deferredText);
+
+  return (
+    <>
+      <h1>05 Example of useDeferredValue 2</h1>
+      <p>
+        <input value={text} onChange={(e) => setText(e.currentTarget.value)} />
+      </p>
+      <Show10000Times text={deferredText} />
+    </>
+  );
+};
+
+// https://qiita.com/uhyo/items/6be96c278c71b0ddb39b#usetransition
+const Show10000Times: React.FC<{
+  text: string;
+}> = memo(({ text }) => (
+  <p>
+    {Array.from({ length: 100 }).map((_, i) => (
+      <Show100Times text={text} />
+    ))}
+  </p>
+));
+
+// https://qiita.com/uhyo/items/6be96c278c71b0ddb39b#usetransition
+const Show100Times: React.FC<{
+  text: string;
+}> = ({ text }) => (
+  <>
+    {Array.from({ length: 100 }).map((_, i) => (
+      <span key={i}>{text}</span>
+    ))}
+  </>
+);
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="react-18-sandbox" />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route.{' '}
-              <Link to="/page-2">Click here for page 2.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-      </Routes>
-      {/* END: routes */}
-    </StyledApp>
+    <main>
+      <Suspense fallback={<p>loading...</p>}>
+        <Counter />
+      </Suspense>
+      <Example04 />
+      <Example05 />
+    </main>
   );
 }
 
