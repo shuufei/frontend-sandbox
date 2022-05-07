@@ -1,0 +1,82 @@
+{
+  "sourceRoot": "apps/react-18-sandbox/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/react-18-sandbox",
+        "index": "apps/react-18-sandbox/src/index.html",
+        "baseHref": "/",
+        "main": "apps/react-18-sandbox/src/main.tsx",
+        "polyfills": "apps/react-18-sandbox/src/polyfills.ts",
+        "tsConfig": "apps/react-18-sandbox/tsconfig.app.json",
+        "assets": [
+          "apps/react-18-sandbox/src/favicon.ico",
+          "apps/react-18-sandbox/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/react-18-sandbox/src/environments/environment.ts",
+              "with": "apps/react-18-sandbox/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "react-18-sandbox:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "react-18-sandbox:build:development"
+        },
+        "production": {
+          "buildTarget": "react-18-sandbox:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/react-18-sandbox/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/react-18-sandbox"],
+      "options": {
+        "jestConfig": "apps/react-18-sandbox/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

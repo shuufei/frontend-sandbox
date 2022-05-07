@@ -1,0 +1,27 @@
+{
+  "sourceRoot": "apps/react-18-sandbox-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-18-sandbox-e2e/cypress.json",
+        "devServerTarget": "react-18-sandbox:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "react-18-sandbox:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/react-18-sandbox-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["react-18-sandbox"]
+}
