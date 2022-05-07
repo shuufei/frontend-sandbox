@@ -1,5 +1,4 @@
 {
-  "root": "apps/nextjs-sample-app",
   "sourceRoot": "apps/nextjs-sample-app",
   "projectType": "application",
   "targets": {
@@ -12,7 +11,8 @@
         "outputPath": "dist/apps/nextjs-sample-app"
       },
       "configurations": {
-        "production": {}
+        "production": {},
+        "development": {}
       }
     },
     "serve": {
@@ -25,8 +25,13 @@
         "production": {
           "buildTarget": "nextjs-sample-app:build:production",
           "dev": false
+        },
+        "development": {
+          "buildTarget": "nextjs-sample-app:build:development",
+          "dev": true
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "export": {
       "executor": "@nrwl/next:export",
@@ -38,7 +43,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/nextjs-sample-app"],
       "options": {
-        "jestConfig": "apps/nextjs-sample-app/jest.config.js",
+        "jestConfig": "apps/nextjs-sample-app/jest.config.ts",
         "passWithNoTests": true
       }
     },

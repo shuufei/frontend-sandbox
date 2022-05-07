@@ -1,5 +1,4 @@
 {
-  "root": "apps/function-component-sample-app",
   "sourceRoot": "apps/function-component-sample-app/src",
   "projectType": "application",
   "targets": {
@@ -37,6 +36,12 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         }
       }
     },
@@ -50,8 +55,12 @@
         "production": {
           "buildTarget": "function-component-sample-app:build:production",
           "hmr": false
+        },
+        "development": {
+          "buildTarget": "function-component-sample-app:build:development"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -66,7 +75,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/function-component-sample-app"],
       "options": {
-        "jestConfig": "apps/function-component-sample-app/jest.config.js",
+        "jestConfig": "apps/function-component-sample-app/jest.config.ts",
         "passWithNoTests": true
       }
     }
