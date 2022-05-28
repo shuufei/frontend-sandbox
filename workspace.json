@@ -6,6 +6,7 @@
     "nextjs-sample-app": "apps/nextjs-sample-app",
     "nextjs-sample-app-e2e": "apps/nextjs-sample-app-e2e",
     "react-18-sandbox": "apps/react-18-sandbox",
-    "react-18-sandbox-e2e": "apps/react-18-sandbox-e2e"
+    "react-18-sandbox-e2e": "apps/react-18-sandbox-e2e",
+    "react-ssr-sample-app": "apps/react-ssr-sample-app"
   }
 }
