@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/react-ssr-sample-app",
-        "main": "apps/react-ssr-sample-app/src/main.ts",
+        "main": "apps/react-ssr-sample-app/src/main.tsx",
         "tsConfig": "apps/react-ssr-sample-app/tsconfig.app.json",
         "assets": ["apps/react-ssr-sample-app/src/assets"]
       },
