@@ -4,6 +4,7 @@ import { useLoaderData, Link } from '@remix-run/react';
 import type { Joke } from '@prisma/client';
 
 import { db } from '~/utils/db.server';
+import { useState } from 'react';
 
 type LoaderData = { randomJoke: Joke };
 
@@ -18,12 +19,36 @@ export const loader: LoaderFunction = async () => {
   return json(data);
 };
 
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <p>count: {count}</p>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        increment
+      </button>
+      <button
+        onClick={() => {
+          setCount(count - 1);
+        }}
+      >
+        decrement
+      </button>
+    </>
+  );
+};
+
 export default function JokesIndexRoute() {
   const data = useLoaderData<LoaderData>();
 
   return (
     <div>
       <p>Here's a random joke:</p>
+      <Counter />
       <p>{data.randomJoke.content}</p>
       <Link to={data.randomJoke.id}>"{data.randomJoke.name}" Permalink</Link>
     </div>
