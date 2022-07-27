@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "node index.js",
-    "build": "tsc index.ts --declaration"
+    "build": "tsc index.ts --declaration --outDir ./dist"
   },
   "nx": {
     "namedInputs": {
