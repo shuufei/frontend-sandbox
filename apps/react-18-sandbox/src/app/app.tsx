@@ -1,5 +1,6 @@
 import { useState, useDeferredValue, memo, Suspense } from 'react';
 import { Counter } from './components/counter';
+import { Sandbox20220717 } from './sandbox20220717/sandbox-20220717';
 
 // https://qiita.com/uhyo/items/6be96c278c71b0ddb39b#usetransition
 export const Example04 = () => {
@@ -67,8 +68,9 @@ export function App() {
       <Suspense fallback={<p>loading...</p>}>
         <Counter />
       </Suspense>
-      <Example04 />
-      <Example05 />
+      {/* <Example04 />
+      <Example05 /> */}
+      <Sandbox20220717 />
     </main>
   );
 }
