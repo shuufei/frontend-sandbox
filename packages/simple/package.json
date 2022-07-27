@@ -1,0 +1,25 @@
+{
+  "name": "@sandbox-frontend/simple",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node index.js",
+    "build": "tsc index.ts --declaration"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": ["default"],
+        "outputs": ["dist/simple"]
+      },
+      "test": {
+        "inputs": ["default"],
+        "dependsOn": ["build"]
+      }
+    }
+  }
+}
