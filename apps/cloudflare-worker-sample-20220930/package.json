@@ -10,5 +10,8 @@
   "scripts": {
     "start": "wrangler dev",
     "deploy": "wrangler publish"
+  },
+  "dependencies": {
+    "country-code-emoji": "^2.3.0"
   }
 }
