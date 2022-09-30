@@ -1,0 +1,3 @@
+name = "cloudflare-worker-sample-20220930"
+main = "src/index.ts"
+compatibility_date = "2022-09-30"
