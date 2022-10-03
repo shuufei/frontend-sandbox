@@ -1,0 +1,3 @@
+name = "cloudflare-worker-durable-obj-counter-20221003"
+main = "src/index.ts"
+compatibility_date = "2022-10-03"
