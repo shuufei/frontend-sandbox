@@ -1,4 +1,7 @@
-import { FC, Suspense } from 'react';
+import { 
+  FC,
+  Suspense
+ } from 'react';
 import { Counter } from './counter';
 import { FetchContent1 } from './fetch-content1';
 import { FetchContent2 } from './fetch-content2';
@@ -21,7 +24,7 @@ const Loading2: FC = () => {
   return <p>Loading2...</p>
 }
 
-export async function DashboardSettings() {
+export default async function DashboardSettings() {
   const data = await getData();
   return (
     <>
@@ -38,5 +41,3 @@ export async function DashboardSettings() {
     </>
   );
 };
-
-export default DashboardSettings;
