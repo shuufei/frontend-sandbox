@@ -1,7 +1,4 @@
-import { 
-  FC,
-  Suspense
- } from 'react';
+import { FC, Suspense } from 'react';
 import { Counter } from './counter';
 import { FetchContent1 } from './fetch-content1';
 import { FetchContent2 } from './fetch-content2';
@@ -15,14 +12,13 @@ async function getData() {
   });
 }
 
-
 const Loading1: FC = () => {
-  return <p>Loading1...</p>
-}
+  return <p>Loading1...</p>;
+};
 
 const Loading2: FC = () => {
-  return <p>Loading2...</p>
-}
+  return <p>Loading2...</p>;
+};
 
 export default async function DashboardSettings() {
   const data = await getData();
@@ -40,4 +36,4 @@ export default async function DashboardSettings() {
       <NavBar />
     </>
   );
-};
+}
