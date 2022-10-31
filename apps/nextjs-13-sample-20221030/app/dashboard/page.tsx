@@ -5,7 +5,23 @@ const Dashboard: FC = () => {
   return (
     <>
       <h1>Dashboard Top</h1>
-      <Link href="/dashboard/settings">settings</Link>
+      {new Array(100).fill(null).map((num, i) => {
+        return (
+          <p
+            key={i}
+            style={{
+              padding: '1rem',
+              borderBottom: '1px',
+              borderColor: 'red',
+              background: 'white',
+              color: 'black'
+            }}
+          >
+            {i}
+            <Link href="/dashboard/settings">settings</Link>
+          </p>
+        );
+      })}
     </>
   );
 };
