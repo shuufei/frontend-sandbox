@@ -9,6 +9,8 @@
     "nextjs-sample-app-e2e": "apps/nextjs-sample-app-e2e",
     "react-18-sandbox": "apps/react-18-sandbox",
     "react-18-sandbox-e2e": "apps/react-18-sandbox-e2e",
-    "react-ssr-sample-app": "apps/react-ssr-sample-app"
+    "react-ssr-sample-app": "apps/react-ssr-sample-app",
+    "supabase-auth-sample-20221103": "apps/supabase-auth-sample-20221103",
+    "supabase-auth-sample-20221103-e2e": "apps/supabase-auth-sample-20221103-e2e"
   }
 }

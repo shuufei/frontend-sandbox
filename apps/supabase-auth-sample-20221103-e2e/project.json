@@ -1,0 +1,30 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/supabase-auth-sample-20221103-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/supabase-auth-sample-20221103-e2e/cypress.json",
+        "devServerTarget": "supabase-auth-sample-20221103:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "supabase-auth-sample-20221103:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/supabase-auth-sample-20221103-e2e/**/*.{js,ts}"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["supabase-auth-sample-20221103"]
+}

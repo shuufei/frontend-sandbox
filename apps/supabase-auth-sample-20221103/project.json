@@ -1,0 +1,64 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/supabase-auth-sample-20221103",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/supabase-auth-sample-20221103",
+        "outputPath": "dist/apps/supabase-auth-sample-20221103"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "tmp/apps/supabase-auth-sample-20221103"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "supabase-auth-sample-20221103:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "supabase-auth-sample-20221103:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "supabase-auth-sample-20221103:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "supabase-auth-sample-20221103:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/supabase-auth-sample-20221103"],
+      "options": {
+        "jestConfig": "apps/supabase-auth-sample-20221103/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/supabase-auth-sample-20221103/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
