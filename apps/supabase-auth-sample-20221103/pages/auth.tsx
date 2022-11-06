@@ -1,67 +1,106 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../libs/supabase-client';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 
-export default function AuthPage() {
-  const supabaseClient = useSupabaseClient();
+export default function Auth() {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    const cookie = document.cookie;
-    const shuoldUpdateCookie = cookie.includes('supabase-auth-token');
-    console.log('--- should update cookie: ', cookie, shuoldUpdateCookie);
-    if (shuoldUpdateCookie) {
-      fetch('/api/auth/update-cookie');
-    }
-  }, []);
+  // const signIn = async (email) => {
+  //   try {
+  //     setLoading(true);
+  //     const data = await supabase.auth.signInWithOtp({
+  //       email,
+  //       options: {
+  //         emailRedirectTo: 'http://localhost:4200/api/auth/callback',
+  //       },
+  //     });
+  //     console.log('--- signin result: ', data);
+  //     if (data.error) throw data.error;
+  //     alert('Check your email for the login link!');
+  //   } catch (error) {
+  //     alert(error.error_description || error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const signUp = async (email: string, password: string) => {
+  //   try {
+  //     setLoading(true);
+  //     const data = await supabase.auth.signUp({
+  //       email,
+  //       password,
+  //     });
+  //     console.log('--- response signup: ', data);
+  //     if (data.error) throw data.error;
+  //     alert('Check your email for the login link!');
+  //   } catch (error) {
+  //     alert(error.error_description || error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const signInWithGitHub = async () => {
+  //   const data = await supabase.auth.signInWithOAuth({ provider: 'github' });
+  //   console.log('--- signin res: ', data);
+  // };
+
+  const signInWithGoogle = async () => {
+    const data = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: 'http://localhost:4200/' },
+    });
+    console.log('--- signin res: ', data);
+  };
 
   return (
-    <main>
-      <h1>Auth</h1>
-      <div className="row flex flex-center">
+    <div className="row flex flex-center">
+      <div className="col-6 form-widget">
+        <h1 className="header">Supabase + Next.js</h1>
+        {/* <div>
+          <input
+            className="inputField"
+            type="email"
+            placeholder="Your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            className="inputField"
+            type="text"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div> */}
         <div>
-          <div>
-            <button
-              onClick={() => {
-                fetch('/api/me');
-                return;
-              }}
-            >
-              get me
-            </button>
-          </div>
-
-          <div>
-            <button
-              onClick={async () => {
-                const user = await supabaseClient.auth.getUser();
-                console.log('--- user: ', user);
-              }}
-            >
-              get me from client
-            </button>
-          </div>
-
-          <div>
-            <button
-              onClick={() => {
-                fetch('/api/auth/update-cookie');
-                return;
-              }}
-            >
-              update cookie for secure
-            </button>
-          </div>
+          {/* <button
+            onClick={(e) => {
+              e.preventDefault();
+              signUp(email, password);
+            }}
+            className="button block"
+            disabled={loading}
+          >
+            <span>{'SignUp'}</span>
+          </button> */}
+          {/* <button
+            onClick={(e) => {
+              e.preventDefault();
+              signIn(email);
+            }}
+          >
+            send magic link
+          </button> */}
         </div>
-
-        <Auth
-          redirectTo="http://localhost:4200/auth"
-          appearance={{ theme: ThemeSupa }}
-          supabaseClient={supabaseClient}
-          providers={['google']}
-          onlyThirdPartyProviders={true}
-        />
+        <div>
+          {/* <button onClick={signInWithGitHub}>SignIn with GitHub</button> */}
+          <button onClick={signInWithGoogle}>SignIn with Google</button>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
