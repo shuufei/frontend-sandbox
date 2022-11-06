@@ -50,7 +50,7 @@ export default function Auth() {
   const signInWithGoogle = async () => {
     const data = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: 'http://localhost:4200/api/auth/callback' },
+      options: { redirectTo: 'http://localhost:4200/' },
     });
     console.log('--- signin res: ', data);
   };
