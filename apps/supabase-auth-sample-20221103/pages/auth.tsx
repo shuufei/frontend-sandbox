@@ -27,6 +27,27 @@ export default function Auth() {
             Refresh Token
           </button>
         </div>
+
+        <div>
+          <button
+            onClick={() => {
+              fetch('/api/me');
+            }}
+          >
+            get posts
+          </button>
+        </div>
+
+        <div>
+          <button
+            onClick={async () => {
+              const res = await supabase.from('Page_not_rlp').select('*');
+              console.log('--- db query res: ', res);
+            }}
+          >
+            get posts from client
+          </button>
+        </div>
       </div>
     </div>
   );
