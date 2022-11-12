@@ -1,4 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+export const config = {
+  runtime: 'experimental-edge',
+};
+
 const sleep = (ms: number) => {
   return new Promise<void>((resolve) => {
     setTimeout(() => {

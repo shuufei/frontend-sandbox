@@ -28,9 +28,11 @@ export default async function DashboardSettings() {
       <p>data: {JSON.stringify(data)}</p>
       <Counter />
       <Suspense fallback={<Loading1 />}>
+        {/* @ts-ignore */}
         <FetchContent1 />
       </Suspense>
       <Suspense fallback={<Loading2 />}>
+        {/* @ts-ignore */}
         <FetchContent2 />
       </Suspense>
       <NavBar />
