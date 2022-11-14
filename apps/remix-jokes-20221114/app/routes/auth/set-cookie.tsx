@@ -30,6 +30,16 @@ const parseToken = (
   };
 };
 
+const cookieOptions: CookieOptions = {
+  httpOnly: true,
+  path: '/',
+  sameSite: 'lax',
+  secure: true,
+};
+const accessTokenCookie = createCookie('AccessToken', cookieOptions);
+const refreshTokenCookie = createCookie('RefreshToken', cookieOptions);
+const tokenTypeCookie = createCookie('TokenType', cookieOptions);
+
 export const loader: LoaderFunction = async ({ request }) => {
   // const body = await request.json();
   // console.log('--- body: ', body);
@@ -43,24 +53,22 @@ export const action: ActionFunction = async ({ request }) => {
   const { accessToken, expires, refreshToken, tokenType } = parseToken(
     body.hash
   );
-  const cookieOptions: CookieOptions = {
-    expires: new Date(Date.now() + expires),
-    httpOnly: true,
-    path: '/',
-    sameSite: 'lax',
-    secure: true,
-  };
-  const accessTokenCookie = createCookie('AccessToken', cookieOptions);
-  const refreshTokenCookie = createCookie('RefreshToken', cookieOptions);
-  const tokenTypeCookie = createCookie('TokenType', cookieOptions);
 
   const headers = new Headers();
-  headers.append('Set-Cookie', await accessTokenCookie.serialize(accessToken));
+  const options = { expires: new Date(Date.now() + Number(expires)) };
+  console.log('--- expire: ', options.expires.toISOString());
   headers.append(
     'Set-Cookie',
-    await refreshTokenCookie.serialize(refreshToken)
+    await accessTokenCookie.serialize(accessToken, options)
   );
-  headers.append('Set-Cookie', await tokenTypeCookie.serialize(tokenType));
+  headers.append(
+    'Set-Cookie',
+    await refreshTokenCookie.serialize(refreshToken, options)
+  );
+  headers.append(
+    'Set-Cookie',
+    await tokenTypeCookie.serialize(tokenType, options)
+  );
   return new Response(null, {
     headers,
   });
