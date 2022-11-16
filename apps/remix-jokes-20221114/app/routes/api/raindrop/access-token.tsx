@@ -7,6 +7,7 @@ import {
 
 declare const RAINDROP_CLIENT_ID: string;
 declare const RAINDROP_CLIENT_SECRET: string;
+declare const ENDPOINT: string;
 
 type GetAccessTokenResponse = {
   access_token: string;
@@ -38,7 +39,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   console.log('--- params: ', code);
-  const redirectUrl = `http://localhost:4200/api/raindrop/access-token`;
+  const redirectUrl = `${ENDPOINT}/api/raindrop/access-token`;
+  console.log('--- request: ', code, clientId, clientSecret, redirectUrl);
   try {
     const accessTokenRes = await fetch(
       'https://api.raindrop.io/v1/oauth/access_token',
@@ -57,6 +59,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
       }
     );
     const body = (await accessTokenRes.json()) as GetAccessTokenResponse;
+    console.log('--- options: ', body, body.expires_in, typeof body.expires_in);
     const options = { expires: new Date(Date.now() + body.expires_in * 1000) };
     console.log(
       '--- access token: ',

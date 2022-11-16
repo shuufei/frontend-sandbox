@@ -1,4 +1,4 @@
-name = "remix-cloudflare-workers"
+name = "remix-jokes-20221114"
 
 workers_dev = true
 main = "./build/index.js"
@@ -10,4 +10,6 @@ compatibility_date = "2022-04-05"
 
 [build]
   command = "npm run build"
-  
+
+[vars]
+ENDPOINT="https://remix-jokes-20221114.digital-shuufei.workers.dev"

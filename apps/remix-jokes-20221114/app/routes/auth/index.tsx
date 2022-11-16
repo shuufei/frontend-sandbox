@@ -14,16 +14,19 @@ export const getSupabaseForBrowser = (
 type LoadData = {
   supabaseUrl: string;
   supabaseAnonKey: string;
+  endpoint: string;
 };
 
 declare var NX_NEXT_PUBLIC_SUPABASE_URL: string;
 declare var NX_NEXT_PUBLIC_SUPABASE_ANON_KEY: string;
+declare const ENDPOINT: string;
 
 export const loader: LoaderFunction = () => {
   console.log('--- process env: ', NX_NEXT_PUBLIC_SUPABASE_URL);
   return {
     supabaseUrl: NX_NEXT_PUBLIC_SUPABASE_URL,
     supabaseAnonKey: NX_NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    endpoint: ENDPOINT,
   };
 };
 
@@ -31,7 +34,7 @@ export default function Auth() {
   // const refreshSession = () => {
   //   supabase.auth.refreshSession();
   // };
-  const { supabaseUrl, supabaseAnonKey } = useLoaderData<LoadData>();
+  const { supabaseUrl, supabaseAnonKey, endpoint } = useLoaderData<LoadData>();
   console.log('--- supabaseurl: ', supabaseUrl);
   const signInWithGoogle = async () => {
     console.log('--- sign in with google');
@@ -39,7 +42,7 @@ export default function Auth() {
     const data = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:4200',
+        redirectTo: `${endpoint}`,
       },
     });
     console.log('--- signin res: ', data);

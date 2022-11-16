@@ -8,6 +8,8 @@ import { Link, useLoaderData } from '@remix-run/react';
 import { useEffect } from 'react';
 import stylesUrl from '~/styles/index.css';
 
+declare const ENDPOINT: string;
+
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }];
 };
@@ -19,17 +21,20 @@ export const loader: LoaderFunction = async ({ request }) => {
   const accessToken = await accessTokenCookie.parse(cookie);
   const refreshToken = await refreshTokenCookie.parse(cookie);
   console.log('--- token: ', accessToken, refreshToken);
-  return json({});
+  return json({
+    endpoint: ENDPOINT,
+  });
 };
 
 export default function IndexRoute() {
-  useLoaderData();
+  const { endpoint } = useLoaderData();
+  console.log('--- endpoint: ', endpoint);
   useEffect(() => {
     const hash = window.location.hash;
     console.log('---url hash: ', hash);
     const shouldRedirect = hash.startsWith('#access_token=');
     const redirect = async () => {
-      await fetch('http://localhost:4200/auth/set-cookie', {
+      await fetch(`${endpoint}/auth/set-cookie`, {
         method: 'POST',
         body: JSON.stringify({ hash }),
       });
@@ -41,7 +46,7 @@ export default function IndexRoute() {
       return;
     }
     // router.push('/home');
-  }, []);
+  }, [endpoint]);
 
   const getPages = async () => {
     const res = await fetch('/pages');
