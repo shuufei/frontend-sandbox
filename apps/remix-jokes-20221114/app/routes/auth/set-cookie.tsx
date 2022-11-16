@@ -36,7 +36,7 @@ const cookieOptions: CookieOptions = {
   sameSite: 'lax',
   secure: true,
 };
-const accessTokenCookie = createCookie('AccessToken', cookieOptions);
+export const accessTokenCookie = createCookie('AccessToken', cookieOptions);
 const refreshTokenCookie = createCookie('RefreshToken', cookieOptions);
 const tokenTypeCookie = createCookie('TokenType', cookieOptions);
 
@@ -55,8 +55,13 @@ export const action: ActionFunction = async ({ request }) => {
   );
 
   const headers = new Headers();
-  const options = { expires: new Date(Date.now() + Number(expires)) };
-  console.log('--- expire: ', options.expires.toISOString());
+  const options = { expires: new Date(Date.now() + Number(expires) * 1000) };
+  console.log(
+    '--- expire: ',
+    options.expires.toISOString(),
+    Date.now(),
+    expires
+  );
   headers.append(
     'Set-Cookie',
     await accessTokenCookie.serialize(accessToken, options)
