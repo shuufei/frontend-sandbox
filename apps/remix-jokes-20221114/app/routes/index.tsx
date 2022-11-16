@@ -48,13 +48,23 @@ export default function IndexRoute() {
     console.log('--- get /pages: ', await res.json());
   };
 
+  const integrateRaindrop = async () => {
+    location.href = '/api/raindrop/authorize';
+    return;
+  };
+
   return (
     <div className="container">
       <div className="content">
         <h1>
           Remix <span>Jokes!</span>
         </h1>
-        <button onClick={getPages}>get pages</button>
+        <div>
+          <button onClick={getPages}>get pages</button>
+        </div>
+        <div>
+          <button onClick={integrateRaindrop}>Raindropと連携</button>
+        </div>
         <nav>
           <ul>
             <li>
