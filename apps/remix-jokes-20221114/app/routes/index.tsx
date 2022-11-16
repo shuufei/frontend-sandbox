@@ -42,12 +42,19 @@ export default function IndexRoute() {
     }
     // router.push('/home');
   }, []);
+
+  const getPages = async () => {
+    const res = await fetch('/pages');
+    console.log('--- get /pages: ', await res.json());
+  };
+
   return (
     <div className="container">
       <div className="content">
         <h1>
           Remix <span>Jokes!</span>
         </h1>
+        <button onClick={getPages}>get pages</button>
         <nav>
           <ul>
             <li>
