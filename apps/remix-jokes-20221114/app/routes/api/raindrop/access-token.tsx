@@ -23,12 +23,12 @@ const cookieOptions: CookieOptions = {
   sameSite: 'lax',
   secure: true,
 };
-const raindropAccessTokenCookie = createCookie(
+export const raindropAccessTokenCookie = createCookie(
   'RainAccessToken',
   cookieOptions
 );
 const raindropRefreshTokenCookie = createCookie(
-  'RainAccessToken',
+  'RainRefreshToken',
   cookieOptions
 );
 const raindropTokenType = createCookie('RaindropTokenType', cookieOptions);

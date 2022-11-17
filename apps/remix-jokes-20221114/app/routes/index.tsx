@@ -58,6 +58,13 @@ export default function IndexRoute() {
     return;
   };
 
+  const getCollections = async () => {
+    const res = await fetch('/api/raindrop/collections');
+    const body = await res.json();
+    console.log('--- get collections: ', body);
+    return;
+  };
+
   return (
     <div className="container">
       <div className="content">
@@ -70,13 +77,16 @@ export default function IndexRoute() {
         <div>
           <button onClick={integrateRaindrop}>Raindropと連携</button>
         </div>
-        <nav>
+        <div>
+          <button onClick={getCollections}>get raindrop collections</button>
+        </div>
+        {/* <nav>
           <ul>
             <li>
               <Link to="jokes">Read Jokes</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
     </div>
   );

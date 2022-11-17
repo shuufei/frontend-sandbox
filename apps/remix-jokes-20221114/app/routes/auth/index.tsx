@@ -38,6 +38,7 @@ export default function Auth() {
   console.log('--- supabaseurl: ', supabaseUrl);
   const signInWithGoogle = async () => {
     console.log('--- sign in with google');
+    console.log('--- redirect to: ', endpoint);
     const supabase = getSupabaseForBrowser(supabaseUrl, supabaseAnonKey);
     const data = await supabase.auth.signInWithOAuth({
       provider: 'google',
