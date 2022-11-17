@@ -5,10 +5,22 @@ import {
   LoaderFunction,
 } from '@remix-run/cloudflare';
 import { Link, useLoaderData } from '@remix-run/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import stylesUrl from '~/styles/index.css';
 
 declare const ENDPOINT: string;
+
+type Collection = {
+  _id: number;
+  title: string;
+  public: boolean;
+};
+type GetCollectionsRes = {
+  collections: {
+    result: boolean;
+    items: Collection[];
+  };
+};
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }];
@@ -28,6 +40,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function IndexRoute() {
   const { endpoint } = useLoaderData();
+  const [collections, setCollectios] = useState<Collection[]>([]);
   console.log('--- endpoint: ', endpoint);
   useEffect(() => {
     const hash = window.location.hash;
@@ -60,8 +73,9 @@ export default function IndexRoute() {
 
   const getCollections = async () => {
     const res = await fetch('/api/raindrop/collections');
-    const body = await res.json();
+    const body = await res.json<GetCollectionsRes>();
     console.log('--- get collections: ', body);
+    setCollectios(body.collections.items);
     return;
   };
 
@@ -80,6 +94,20 @@ export default function IndexRoute() {
         <div>
           <button onClick={getCollections}>get raindrop collections</button>
         </div>
+        <section>
+          <h2>collections</h2>
+          <ul>
+            {collections.map((collection) => {
+              return (
+                <li key={collection._id}>
+                  <Link to={`raindrop/collections/${collection._id}`}>
+                    {collection._id}: {collection.title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
         {/* <nav>
           <ul>
             <li>
