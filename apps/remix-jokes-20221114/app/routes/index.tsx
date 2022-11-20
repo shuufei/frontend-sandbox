@@ -79,6 +79,11 @@ export default function IndexRoute() {
     return;
   };
 
+  const getFolders = async () => {
+    const res = await fetch('/api/db/folders');
+    console.log('--- get /folders: ', await res.json());
+  };
+
   return (
     <div className="container">
       <div className="content">
@@ -87,6 +92,9 @@ export default function IndexRoute() {
         </h1>
         <div>
           <button onClick={getPages}>get pages</button>
+        </div>
+        <div>
+          <button onClick={getFolders}>get folders</button>
         </div>
         <div>
           <button onClick={integrateRaindrop}>Raindropと連携</button>

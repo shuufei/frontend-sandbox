@@ -6,8 +6,11 @@ main = "./build/index.js"
 compatibility_date = "2022-04-05"
 
 kv_namespaces = [
-  { binding = "RAINDROP_CACHE", id = "b660d85965f847f9981e3d4799bc67cb" }
+  { binding = "RAINDROP_CACHE", preview_id = "53f93b657ea248098f72cd73585de273", id = "b660d85965f847f9981e3d4799bc67cb" }
 ]
+
+[vars]
+ENDPOINT = "http://localhost:4200"
 
 [site]
   bucket = "./public"
@@ -15,5 +18,22 @@ kv_namespaces = [
 [build]
   command = "npm run build"
 
-[vars]
-ENDPOINT="https://remix-jokes-20221114.digital-shuufei.workers.dev"
+[[ d1_databases ]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "puddle"
+database_id = "de565ebe-6aa4-4d36-8f1b-fc5ba4fe3498"
+
+
+# ===== production =====
+[env.production.vars]
+ENDPOINT = "https://remix-jokes-20221114-production.digital-shuufei.workers.dev"
+
+[[ env.production.d1_databases ]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "puddle"
+database_id = "de565ebe-6aa4-4d36-8f1b-fc5ba4fe3498"
+
+[env.production]
+kv_namespaces = [
+  { binding = "RAINDROP_CACHE", preview_id = "53f93b657ea248098f72cd73585de273", id = "b660d85965f847f9981e3d4799bc67cb" }
+]
