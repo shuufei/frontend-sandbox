@@ -5,6 +5,6 @@ export const deletePost = async (id: Post['id']) => {
     setTimeout(() => {
       console.log(`--- delete: ${id}`);
       resolve();
-    }, 3000);
+    }, 500);
   });
 };

@@ -1,7 +1,7 @@
 ---
 import { Header } from "../components/Header";
 import { PostItem } from "../components/posts/PostItemDeletable";
-import { getPosts } from "../server/get-posts";
+import { getPosts } from "../server/get-posts-1000";
 
 const posts = await getPosts();
 ---
@@ -15,9 +15,9 @@ const posts = await getPosts();
 	</head>
 	<body>
 		<Header title="posts" />
-		<h2 style={{fontSize: '12px'}}>Astro: item count 100</h2>
+		<h2 style={{fontSize: '12px'}}>Astro: item count 1000</h2>
     {posts.map(post => {
-      return <PostItem client:load post={post} />
+      return <PostItem client:visible post={post} />
     })}
 	</body>
 </html>

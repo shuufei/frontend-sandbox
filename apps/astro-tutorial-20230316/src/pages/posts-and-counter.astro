@@ -16,6 +16,7 @@ const posts = await getPosts();
 	</head>
 	<body>
 		<Header title="posts" />
+		<h2 style={{fontSize: '12px'}}>Astro: item count 100</h2>
 		<Counter client:load defaultValue={10} />
     {posts.map(post => {
       return <PostItem post={post} />

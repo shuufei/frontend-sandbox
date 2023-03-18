@@ -15,6 +15,7 @@ const PostPage = async () => {
       </head>
       <body>
         <Header title="posts" />
+        <h2 style={{ fontSize: '12px' }}>Next.js: item count 100</h2>
         {posts.map((post) => {
           return <PostItem key={post.id} post={post} />;
         })}

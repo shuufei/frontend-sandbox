@@ -4,7 +4,7 @@ export type Post = {
   description: string;
 };
 
-const posts: Post[] = new Array(100).fill(null).map((_, i) => {
+const posts: Post[] = new Array(1000).fill(null).map((_, i) => {
   return {
     id: `id-${i}`,
     title: `title-${i}`,

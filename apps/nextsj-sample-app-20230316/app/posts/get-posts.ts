@@ -15,6 +15,6 @@ export const getPosts = async () => {
   return new Promise<Post[]>((resolve) => {
     setTimeout(() => {
       resolve(posts);
-    }, 500);
+    }, 0);
   });
 };
